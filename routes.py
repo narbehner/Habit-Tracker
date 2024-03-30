@@ -55,6 +55,10 @@ def index():
 
 @pages.route("/add", methods=["GET", "POST"])
 def add_habit():
+    #honeypot: add hidden form to your input field that human user wouldn't be able to see, if it's filled, discard submission to avoid spam
+    honeypot = request.form.get("pot")
+    if honeypot:
+        return "submission not added due to spam"
     today = today_at_midnight()
     data_to_insert = {"_id": uuid.uuid4().hex, "added": today, "name": request.form.get("habit")}
     if request.form:
