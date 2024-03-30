@@ -13,11 +13,11 @@
 </head>
 <body>
     <header class="header">
-        <h1 class="header__logo"><a href="{{url_for('index')}}" class="header__link">Habits</a></h1>
+        <h1 class="header__logo"><a href="{{url_for('habits.index')}}" class="header__link">Habits</a></h1>
         <!--checks which page currently on-->
         {%if "add" not in request.endpoint %}
         <!--url_for(function name of endpoint)-->
-            <a href="{{url_for('add_habit')}}" class="header__link">+Add New Habbit</a>
+            <a href="{{url_for('habits.add_habit')}}" class="header__link">+Add New Habbit</a>
         {%endif%}
     </header>
 
@@ -28,7 +28,7 @@
                     and assigns it the value of date (line 5 jinja for loop) which is the name of the iterator through date_range list-->
             {%for date in date_range(selected_date)%}
                 <a class="dates__link {{'dates__link--current' if loop.index0 == 3 else ''}}" 
-                    href="{{url_for('index', date=date)}}">
+                    href="{{url_for('habits.index', date=date)}}">
                     <time class="date" datetime="{{date}}">
                         <span>{{date.strftime('%a')}}</span>
                         <span>{{date.strftime('%d')}}</span>
